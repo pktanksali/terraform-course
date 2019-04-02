@@ -1,21 +1,21 @@
-resource "aws_elastic_beanstalk_application" "app" {
-  name = "app"
-  description = "app"
+resource "aws_elastic_beanstalk_application" "prasad-app" {
+  name = "prasad-app"
+  description = "prasad-app"
 }
 
-resource "aws_elastic_beanstalk_environment" "app-prod" {
-  name = "app-prod"
-  application = "${aws_elastic_beanstalk_application.app.name}"
-  solution_stack_name = "64bit Amazon Linux 2016.09 v2.3.0 running PHP 7.0"
+resource "aws_elastic_beanstalk_environment" "prasad-app-prod" {
+  name = "prasad-app-prod"
+  application = "${aws_elastic_beanstalk_application.prasad-app.name}"
+  solution_stack_name = "64bit Amazon Linux 2018.03 v2.8.7 running PHP 7.2"
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
-    value     = "${aws_vpc.main.id}"
+    value     = "${aws_vpc.prasad-main.id}"
   }
   setting {
     namespace = "aws:ec2:vpc"
     name = "Subnets"
-    value = "${aws_subnet.main-private-1.id},${aws_subnet.main-private-2.id}"
+    value = "${aws_subnet.prasad-main-private-1.id},${aws_subnet.prasad-main-private-2.id}"
   }
   setting {
     namespace = "aws:ec2:vpc"
@@ -25,17 +25,17 @@ resource "aws_elastic_beanstalk_environment" "app-prod" {
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name = "IamInstanceProfile"
-    value = "${aws_iam_instance_profile.app-ec2-role.name}"
+    value = "${aws_iam_instance_profile.prasad-app-ec2-role.name}"
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name = "SecurityGroups"
-    value = "${aws_security_group.app-prod.id}"
+    value = "${aws_security_group.prasad-app-prod.id}"
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name = "EC2KeyName"
-    value = "${aws_key_pair.mykeypair.id}"
+    value = "${aws_key_pair.prasadkeypair.id}"
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -55,7 +55,7 @@ resource "aws_elastic_beanstalk_environment" "app-prod" {
   setting {
     namespace = "aws:ec2:vpc"
     name = "ELBSubnets"
-    value = "${aws_subnet.main-public-1.id},${aws_subnet.main-public-2.id}"
+    value = "${aws_subnet.prasad-main-public-1.id},${aws_subnet.prasad-main-public-2.id}"
   }
   setting {
     namespace = "aws:elb:loadbalancer"
