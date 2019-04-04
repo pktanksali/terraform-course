@@ -1,11 +1,13 @@
+variable "AWS_ACCESS_KEY" {}
+variable "AWS_SECRET_KEY" {}
 variable "AWS_REGION" {
-  default = "eu-west-1"
+  default = "us-east-1"
 }
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "mykey"
+  default = "prasadkey"
 }
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "mykey.pub"
+  default = "prasadkey.pub"
 }
 variable "ECS_INSTANCE_TYPE" {
   default = "t2.micro"
@@ -13,7 +15,7 @@ variable "ECS_INSTANCE_TYPE" {
 variable "ECS_AMIS" {
   type = "map"
   default = {
-    us-east-1 = "ami-1924770e"
+    us-east-1 = "ami-007571470797b8ffa"
     us-west-2 = "ami-56ed4936"
     eu-west-1 = "ami-c8337dbb"
   }

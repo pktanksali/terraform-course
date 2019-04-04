@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs-securitygroup" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = "${aws_vpc.prasad-main.id}"
   name = "ecs"
   description = "security group for ecs"
   egress {
@@ -13,7 +13,7 @@ resource "aws_security_group" "ecs-securitygroup" {
       from_port = 3000
       to_port = 3000
       protocol = "tcp"
-      security_groups = ["${aws_security_group.myapp-elb-securitygroup.id}"]
+      security_groups = ["${aws_security_group.prasadapp-elb-securitygroup.id}"]
   } 
   ingress {
       from_port = 22
@@ -25,9 +25,9 @@ resource "aws_security_group" "ecs-securitygroup" {
     Name = "ecs"
   }
 }
-resource "aws_security_group" "myapp-elb-securitygroup" {
-  vpc_id = "${aws_vpc.main.id}"
-  name = "myapp-elb"
+resource "aws_security_group" "prasadapp-elb-securitygroup" {
+  vpc_id = "${aws_vpc.prasad-main.id}"
+  name = "prasadapp-elb"
   description = "security group for ecs"
   egress {
       from_port = 0
@@ -43,6 +43,6 @@ resource "aws_security_group" "myapp-elb-securitygroup" {
       cidr_blocks = ["0.0.0.0/0"]
   } 
   tags {
-    Name = "myapp-elb"
+    Name = "prasadapp-elb"
   }
 }
